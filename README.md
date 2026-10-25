@@ -5,7 +5,7 @@
 Dining out should not be an interrogation. SafeBytes provides a solution: Real-time allergen awareness and cross-contamination alerts for peace of mind at the table.
 
 ## Our Story
-Dining out with friends should be about conversation and good food. For our friend group, it typically starts with the same questions:
+Dining out with friends should be about conversation and good food. However, for our friend group, it typically starts with the same questions:
 *"Does anything in our order contain peanuts? Does the fryer use this type of oil?"*
 
 Watching our friend navigate severe allergies showed us that dining out is loaded with anxiety. Waitstaff can be uninformed, menus lack allergen warnings, and hidden cross-contamination risks turn what should be a positive experience into one filled with paranoia.
