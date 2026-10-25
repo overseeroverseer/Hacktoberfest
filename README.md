@@ -25,7 +25,6 @@ This inspired us to build **SafeBytes** to eliminate the questions. By bridging 
 
 
 ## Installation and Local Setup
----
 
 Follow these steps to set up and run SafeBytes locally on your machine.
 
