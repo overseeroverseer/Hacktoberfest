@@ -64,7 +64,9 @@ except Exception as e:
 st.title("SafeBytes")
 st.caption("Intelligent allergen detection and cross-contamination tracking")
 
-tab_customer, tab_owner = st.tabs(["Customer View", "Restaurant Owner View"])
+# on_change="rerun" makes the tabs remember the selected tab, so st.rerun() after an
+# owner action (Audit, Add, Save) doesn't jump back to the Customer tab.
+tab_customer, tab_owner = st.tabs(["Customer View", "Restaurant Owner View"], key="tab", on_change="rerun")
 
 # ==========================================
 # STEP 2 & 3: CUSTOMER PAGE + CHAT
@@ -168,8 +170,9 @@ def run_audit(dishes):
         results = owner_ai.audit_dishes(dishes)
     except Exception as e:
         st.session_state.audit = None
-        st.session_state.flash = ("error", f"The allergen audit couldn't run: {e}")
+        st.session_state.audit_error = f"The allergen audit couldn't run: {e}"
         return
+    st.session_state.pop("audit_error", None)
     st.session_state.audit = [
         {"dish": d["name"], **s} for d, suggestions in zip(dishes, results) for s in suggestions
     ]
@@ -296,6 +299,12 @@ with tab_owner:
                     # "Did you forget something?" check on the new dish
                     with st.spinner("Checking for allergens you might have missed..."):
                         run_audit([new_dish])
+                    if st.session_state.get("audit"):
+                        st.session_state.flash = (
+                            "warning",
+                            f"Added '{item_name}', but the AI thinks it may be missing allergens. "
+                            "See Missing Allergen Check below.",
+                        )
                     st.rerun()
                 else:
                     st.error("Please fill in all fields (Name, Ingredients, and Stations).")
@@ -328,6 +337,11 @@ with tab_owner:
             run_audit(current_menu)
         st.rerun()
 
+    if "audit_error" in st.session_state:
+        st.error(st.session_state.audit_error)
+    if "audit_note" in st.session_state:
+        st.success(st.session_state.pop("audit_note"))
+
     audit = st.session_state.get("audit")
     if audit:
         for i, s in enumerate(audit):
@@ -339,6 +353,10 @@ with tab_owner:
             if col_add.button("Add", key=f"audit_add_{i}"):
                 add_ingredient(s["dish"], s["ingredient"])
                 audit.pop(i)
+                st.session_state.audit_note = (
+                    f"Added {s['ingredient']} to {s['dish']}. It's now flagged for "
+                    f"{', '.join(s['allergens'])} on the customer page."
+                )
                 st.rerun()
             if col_dismiss.button("Dismiss", key=f"audit_dismiss_{i}"):
                 audit.pop(i)
