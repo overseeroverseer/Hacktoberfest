@@ -1,1 +1,67 @@
-[]
+[
+  {
+    "name": "Kung Pao Chicken",
+    "ingredients": ["chicken", "peanuts", "soy sauce", "dried chili", "garlic", "scallion"],
+    "stations": ["wok"]
+  },
+  {
+    "name": "Vegetable Fried Rice",
+    "ingredients": ["rice", "egg", "carrot", "peas", "scallion", "vegetable oil"],
+    "stations": ["wok"]
+  },
+  {
+    "name": "Garlic Green Beans",
+    "ingredients": ["green beans", "garlic", "vegetable oil", "salt"],
+    "stations": ["wok"]
+  },
+  {
+    "name": "Pad Thai",
+    "ingredients": ["rice noodles", "shrimp", "egg", "peanuts", "fish sauce", "tamarind", "bean sprouts"],
+    "stations": ["wok"]
+  },
+  {
+    "name": "Beef and Broccoli",
+    "ingredients": ["beef", "broccoli", "oyster sauce", "soy sauce", "garlic", "ginger"],
+    "stations": ["wok"]
+  },
+  {
+    "name": "Fish and Chips",
+    "ingredients": ["cod", "wheat flour", "beer", "potato", "vegetable oil"],
+    "stations": ["fryer"]
+  },
+  {
+    "name": "French Fries",
+    "ingredients": ["potato", "vegetable oil", "salt"],
+    "stations": ["fryer"]
+  },
+  {
+    "name": "Coconut Shrimp",
+    "ingredients": ["shrimp", "coconut", "panko", "egg", "wheat flour"],
+    "stations": ["fryer"]
+  },
+  {
+    "name": "Onion Rings",
+    "ingredients": ["onion", "wheat flour", "milk", "vegetable oil"],
+    "stations": ["fryer"]
+  },
+  {
+    "name": "Grilled Salmon",
+    "ingredients": ["salmon", "lemon", "olive oil", "dill"],
+    "stations": ["grill"]
+  },
+  {
+    "name": "Satay Skewers",
+    "ingredients": ["chicken", "peanut sauce", "lemongrass", "coconut milk"],
+    "stations": ["grill"]
+  },
+  {
+    "name": "Grilled Vegetable Plate",
+    "ingredients": ["zucchini", "bell pepper", "eggplant", "olive oil", "salt"],
+    "stations": ["grill"]
+  },
+  {
+    "name": "Cheeseburger",
+    "ingredients": ["beef", "cheddar", "wheat bun", "lettuce", "tomato"],
+    "stations": ["grill", "fryer"]
+  }
+]
