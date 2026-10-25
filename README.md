@@ -13,6 +13,7 @@ Watching our friend navigate severe allergies showed us that dining out is loade
 This inspired us to build **SafeBytes** to eliminate the questions. By bridging transparent restaurant menu data with proactive consumer warnings, we ensure nobody at the table has to wonder if their next bite is safe.
 
 ### What It Does
+---
 
 #### 1. For Restaurants (Data Ingestion & Tagging)
 - **Menu Management Portal:** Kitchens input dishes as well as their potential allergens.
@@ -23,7 +24,8 @@ This inspired us to build **SafeBytes** to eliminate the questions. By bridging 
 
 
 
-## <u>Installation and Local Setup</u>
+## Installation and Local Setup
+---
 
 Follow these steps to set up and run SafeBytes locally on your machine.
 
