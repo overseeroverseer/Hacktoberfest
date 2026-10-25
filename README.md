@@ -127,7 +127,7 @@ Designed for diners with dietary restrictions or food allergies, this interface 
   * **Caution: Shared Station (Yellow):** Identifies dishes that are recipe-safe but carry cross-contact risks due to shared cooking surfaces (e.g., fries cooked in the same oil as breaded calamari). The card explicitly states the exact station and the dish responsible for introducing the allergen hazard.
   * **Contains Allergen (Red):** Clearly flags dishes containing active ingredients linked to the chosen allergen, preventing accidental consumption.
 * **Staff Confirmation Prompts:** Every categorized item includes explicit safety reminders prompting diners to confirm preparation protocols with serving staff before placing an order.
-* **SafeBytes AI Chat Assistant:** An integrated, conversational assistant allows customers to ask plain-language questions about prep methods, cooking oils, and potential kitchen cross-contamination risks before ordering.
+* **SafeBytes AI Chat Assistant:** An integrated, conversational assistant allows customers to ask plain-language questions about prep methods, cooking oils, and potential kitchen cross-contamination risks before ordering. Can also answer questions in different languages.
 
 ---
 
