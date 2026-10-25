@@ -1,72 +1,198 @@
 [
   {
     "name": "Kung Pao Chicken",
-    "ingredients": ["chicken", "peanuts", "soy sauce", "dried chili", "garlic", "scallion"],
-    "stations": ["wok"]
+    "ingredients": [
+      "chicken",
+      "peanuts",
+      "soy sauce",
+      "dried chili",
+      "garlic",
+      "scallion"
+    ],
+    "stations": [
+      "wok"
+    ]
   },
   {
     "name": "Vegetable Fried Rice",
-    "ingredients": ["rice", "egg", "carrot", "peas", "scallion", "vegetable oil"],
-    "stations": ["wok"]
+    "ingredients": [
+      "rice",
+      "egg",
+      "carrot",
+      "peas",
+      "scallion",
+      "vegetable oil"
+    ],
+    "stations": [
+      "wok"
+    ]
   },
   {
     "name": "Garlic Green Beans",
-    "ingredients": ["green beans", "garlic", "vegetable oil", "salt"],
-    "stations": ["wok"]
+    "ingredients": [
+      "green beans",
+      "garlic",
+      "vegetable oil",
+      "salt"
+    ],
+    "stations": [
+      "wok"
+    ]
   },
   {
     "name": "Pad Thai",
-    "ingredients": ["rice noodles", "shrimp", "egg", "peanuts", "fish sauce", "tamarind", "bean sprouts"],
-    "stations": ["wok"]
+    "ingredients": [
+      "rice noodles",
+      "shrimp",
+      "egg",
+      "peanuts",
+      "fish sauce",
+      "tamarind",
+      "bean sprouts"
+    ],
+    "stations": [
+      "wok"
+    ]
   },
   {
     "name": "Beef and Broccoli",
-    "ingredients": ["beef", "broccoli", "oyster sauce", "soy sauce", "garlic", "ginger"],
-    "stations": ["wok"]
+    "ingredients": [
+      "beef",
+      "broccoli",
+      "oyster sauce",
+      "soy sauce",
+      "garlic",
+      "ginger"
+    ],
+    "stations": [
+      "wok"
+    ]
   },
   {
     "name": "Fish and Chips",
-    "ingredients": ["cod", "wheat flour", "beer", "potato", "vegetable oil"],
-    "stations": ["fryer"]
+    "ingredients": [
+      "cod",
+      "wheat flour",
+      "beer",
+      "potato",
+      "vegetable oil"
+    ],
+    "stations": [
+      "fryer"
+    ]
   },
   {
     "name": "French Fries",
-    "ingredients": ["potato", "vegetable oil", "salt"],
-    "stations": ["fryer"]
+    "ingredients": [
+      "potato",
+      "vegetable oil",
+      "salt"
+    ],
+    "stations": [
+      "fryer"
+    ]
   },
   {
     "name": "Coconut Shrimp",
-    "ingredients": ["shrimp", "coconut", "panko", "egg", "wheat flour"],
-    "stations": ["fryer"]
+    "ingredients": [
+      "shrimp",
+      "coconut",
+      "panko",
+      "egg",
+      "wheat flour"
+    ],
+    "stations": [
+      "fryer"
+    ]
   },
   {
     "name": "Onion Rings",
-    "ingredients": ["onion", "wheat flour", "milk", "vegetable oil"],
-    "stations": ["fryer"]
+    "ingredients": [
+      "onion",
+      "wheat flour",
+      "milk",
+      "vegetable oil"
+    ],
+    "stations": [
+      "fryer"
+    ]
   },
   {
     "name": "Spring Rolls",
-    "ingredients": ["cabbage", "carrot", "wheat wrapper", "vegetable oil"],
-    "stations": ["fryer"]
+    "ingredients": [
+      "cabbage",
+      "carrot",
+      "wheat wrapper",
+      "vegetable oil"
+    ],
+    "stations": [
+      "fryer"
+    ]
   },
   {
     "name": "Grilled Salmon",
-    "ingredients": ["salmon", "lemon", "olive oil", "dill"],
-    "stations": ["grill"]
+    "ingredients": [
+      "salmon",
+      "lemon",
+      "olive oil",
+      "dill"
+    ],
+    "stations": [
+      "grill"
+    ]
   },
   {
     "name": "Satay Skewers",
-    "ingredients": ["chicken", "peanut sauce", "lemongrass", "coconut milk"],
-    "stations": ["grill"]
+    "ingredients": [
+      "chicken",
+      "peanut sauce",
+      "lemongrass",
+      "coconut milk"
+    ],
+    "stations": [
+      "grill"
+    ]
   },
   {
     "name": "Grilled Vegetable Plate",
-    "ingredients": ["zucchini", "bell pepper", "eggplant", "olive oil", "salt"],
-    "stations": ["grill"]
+    "ingredients": [
+      "zucchini",
+      "bell pepper",
+      "eggplant",
+      "olive oil",
+      "salt"
+    ],
+    "stations": [
+      "grill"
+    ]
   },
   {
     "name": "Cheeseburger",
-    "ingredients": ["beef", "cheddar", "wheat bun", "lettuce", "tomato"],
-    "stations": ["grill", "fryer"]
+    "ingredients": [
+      "beef",
+      "cheddar",
+      "wheat bun",
+      "lettuce",
+      "tomato"
+    ],
+    "stations": [
+      "grill",
+      "fryer"
+    ]
+  },
+  {
+    "name": "cookies",
+    "ingredients": [
+      "almonds",
+      "butter",
+      "cashews",
+      "milk",
+      "peanuts",
+      "wheat flour"
+    ],
+    "stations": [
+      "bakery",
+      "steam station"
+    ]
   }
 ]
