@@ -84,7 +84,7 @@ venv\Scripts\activate
 ### 3. Install Dependencies
 With your virtual environment activated, install the required packages using pip:
 ```bash
-pip install pandas streamlit
+pip install pandas streamlit python-dotenv google-genai
 ```
 
 ---
