@@ -111,3 +111,40 @@ Once launched, the application will automatically boot up and open a new tab in 
 If you are a developer looking to confirm the baseline package structure, verify that your local environment contains the two primary files in the root folder:
 - **menu.py**: Handles the core backend processing, ingredient-to-allergen mapping, station-contamination matrices, and dataset search logic.
 - **app.py**: Handles the Streamlit user interface, database updates, interactive components, and customer chat interface.
+
+---
+
+## Features and User Capabilities
+
+SafeBytes bridges back-of-house kitchen workflows with front-of-house consumer ordering to make allergen transparency actionable and accessible.
+
+---
+
+### 1. Customer View (Diner Portal)
+
+Designed for diners with dietary restrictions or food allergies, this interface eliminates the anxiety and guesswork of dining out.
+
+* **Dynamic Allergen Filtering:** Patrons can select their specific allergy or dietary restriction (e.g., peanuts, shellfish, gluten) from an automated selection menu populated directly from backend records.
+* **Three-Tier Safety Classification:**
+  * **Safe Choices (Green):** Displays dishes with no listed allergen ingredients and zero shared equipment exposure.
+  * **Caution: Shared Station (Yellow):** Identifies dishes that are recipe-safe but carry cross-contact risks due to shared cooking surfaces (e.g., fries cooked in the same oil as breaded calamari). The card explicitly states the exact station and the dish responsible for introducing the allergen hazard.
+  * **Contains Allergen (Red):** Clearly flags dishes containing active ingredients linked to the chosen allergen, preventing accidental consumption.
+* **Staff Confirmation Prompts:** Every categorized item includes explicit safety reminders prompting diners to confirm preparation protocols with serving staff before placing an order.
+* **SafeBytes AI Chat Assistant:** An integrated, conversational assistant allows customers to ask plain-language questions about prep methods, cooking oils, and potential kitchen cross-contamination risks before ordering.
+
+---
+
+### 2. Restaurant Owner View (Kitchen Management Dashboard)
+
+A lightweight back-of-house portal that gives chefs and managers control over ingredient tracking and preparation surfaces.
+
+* **Menu Item Onboarding Form:** Kitchen operators can add new dishes by defining:
+  * Dish Name.
+  * Ingredients: Multi-select tagging from a normalized food database.
+  * Kitchen Stations: Physical equipment and preparation areas used (e.g., wok, grill, fryer, salad bar).
+* **Automated Allergen Tagging:** Ingredients entered into the system are automatically matched against our standardized allergen taxonomy, removing manual data entry overhead for staff.
+* **Live Menu Database Records:** A clean, searchable data table displaying all current menu items, assigned ingredients, physical kitchen stations, and automatically computed allergen flags.
+* **Physical Station Cross-Contamination Map:** A dedicated back-of-house visualization tool that breaks down each physical workstation in the kitchen:
+  * Lists every dish prepared at that specific station.
+  * Identifies any active allergen hazards introduced to shared equipment.
+  * Visually marks stations as clean or contaminated, helping kitchen staff prevent cross-contact during rush hours.
