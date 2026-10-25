@@ -8,7 +8,7 @@ Dining out should not be an interrogation. SafeBytes provides a solution: Real-t
 Dining out with friends should be about conversation and good food. However, for our friend group, it typically starts with the same questions:
 *"Does anything in our order contain peanuts? Does the fryer use this type of oil?"*
 
-Watching our friend navigate severe allergies showed us that dining out is loaded with anxiety. Waitstaff can be uninformed, menus lack allergen warnings, and hidden cross-contamination risks turn what should be a positive experience into one filled with paranoia.
+Watching our friend (Haii Kaylie) navigate severe allergies showed us that dining out is loaded with anxiety. Waitstaff can be uninformed, menus lack allergen warnings, and hidden cross-contamination risks turn what should be a positive experience into one filled with paranoia.
 
 This inspired us to build **SafeBytes** to eliminate the questions. By bridging transparent restaurant menu data with proactive consumer warnings, we ensure nobody at the table has to wonder what is in their next bite.
 
