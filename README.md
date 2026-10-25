@@ -97,7 +97,6 @@ streamlit run app.py
 
 Once launched, the application will automatically boot up and open a new tab in your default web browser (usually at http://localhost:8501).
 
----
 
 ## Core Libraries and Frameworks Used
 
