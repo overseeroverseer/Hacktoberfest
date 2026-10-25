@@ -5,6 +5,7 @@ from pathlib import Path
 
 # Import Person A's backend utilities
 import menu as backend
+import owner_ai
 from assistant import answer
 
 st.set_page_config(page_title="SafeBytes", layout="wide")
@@ -144,8 +145,115 @@ with tab_customer:
 # ==========================================
 # STEP 1: RESTAURANT OWNER PAGE
 # ==========================================
+def save_dishes(new_dishes):
+    """Add dishes to menu.json, replacing any existing dish with the same name."""
+    menu_list = backend.load_menu(MENU_FILE)
+    for dish in new_dishes:
+        menu_list = [d for d in menu_list if d["name"].lower() != dish["name"].lower()]
+        menu_list.append(dish)
+    backend.save_menu(menu_list, MENU_FILE)
+
+
+def add_ingredient(dish_name, ingredient):
+    menu_list = backend.load_menu(MENU_FILE)
+    for d in menu_list:
+        if d["name"] == dish_name and ingredient not in d["ingredients"]:
+            d["ingredients"].append(ingredient)
+    backend.save_menu(menu_list, MENU_FILE)
+
+
+def run_audit(dishes):
+    """Run Person A's audit and store flat suggestions for the audit panel."""
+    try:
+        results = owner_ai.audit_dishes(dishes)
+    except Exception as e:
+        st.session_state.audit = None
+        st.session_state.flash = ("error", f"The allergen audit couldn't run: {e}")
+        return
+    st.session_state.audit = [
+        {"dish": d["name"], **s} for d, suggestions in zip(dishes, results) for s in suggestions
+    ]
+
+
 with tab_owner:
     st.subheader("Kitchen Station & Item Manager")
+
+    if "flash" in st.session_state:
+        kind, text = st.session_state.pop("flash")
+        getattr(st, kind)(text)
+
+    # --- AI MENU IMPORT: paste or photograph the menu, AI proposes tags, owner approves ---
+    with st.expander("Import a menu with AI (paste text or upload a photo)", expanded=False):
+        with st.form("import_form"):
+            menu_text = st.text_area("Menu text", height=160,
+                                     placeholder="Shrimp Tempura - lightly battered shrimp  9\nBeef Lo Mein - stir-fried egg noodles  14")
+            menu_photo = st.file_uploader("...or a photo of the menu", type=["png", "jpg", "jpeg"])
+            propose = st.form_submit_button("Propose dishes")
+
+        if propose:
+            if not menu_text.strip() and not menu_photo:
+                st.error("Paste some menu text or upload a photo first.")
+            else:
+                with st.spinner("Reading the menu and checking for missing allergens..."):
+                    try:
+                        proposals = owner_ai.propose_dishes(
+                            menu_text,
+                            menu_photo.getvalue() if menu_photo else None,
+                            menu_photo.type if menu_photo else "image/png",
+                        )
+                    except Exception as e:
+                        proposals = None
+                        st.error(f"Couldn't reach the AI: {e}")
+                    if proposals == []:
+                        st.warning("The AI didn't find any dishes. Try pasting the text instead.")
+                    elif proposals:
+                        try:
+                            audits = owner_ai.audit_dishes(proposals)
+                        except Exception:
+                            audits = [[] for _ in proposals]
+                            st.warning("The missing-allergen check couldn't run. Review ingredients carefully.")
+                        st.session_state.proposals = [
+                            {"dish": d, "suggestions": s} for d, s in zip(proposals, audits)
+                        ]
+
+        if st.session_state.get("proposals"):
+            st.markdown("**Review the proposed dishes.** Nothing is saved until you click Save.")
+            with st.form("review_form"):
+                for i, p in enumerate(st.session_state.proposals):
+                    d = p["dish"]
+                    st.markdown(f"---\n**{i + 1}. {d['name']}**")
+                    include = st.checkbox("Include", value=True, key=f"inc_{i}")
+                    st.text_input("Name", value=d["name"], key=f"name_{i}")
+                    st.text_input("Ingredients (comma-separated)", value=", ".join(d["ingredients"]), key=f"ing_{i}")
+                    st.multiselect("Stations", options=backend.STATIONS, default=d["stations"], key=f"st_{i}")
+                    for j, s in enumerate(p["suggestions"]):
+                        st.checkbox(
+                            f"⚠️ Add **{s['ingredient']}** ({', '.join(s['allergens'])}): {s['reason']}",
+                            value=True, key=f"sug_{i}_{j}",
+                        )
+                col_save, col_discard = st.columns(2)
+                save = col_save.form_submit_button("Save selected to menu", type="primary")
+                discard = col_discard.form_submit_button("Discard all")
+
+            if save:
+                to_save = []
+                for i, p in enumerate(st.session_state.proposals):
+                    name = st.session_state[f"name_{i}"].strip()
+                    if not st.session_state[f"inc_{i}"] or not name:
+                        continue
+                    ingredients = [x.strip().lower() for x in st.session_state[f"ing_{i}"].split(",") if x.strip()]
+                    for j, s in enumerate(p["suggestions"]):
+                        if st.session_state[f"sug_{i}_{j}"] and s["ingredient"] not in ingredients:
+                            ingredients.append(s["ingredient"])
+                    to_save.append({"name": name, "ingredients": ingredients,
+                                    "stations": st.session_state[f"st_{i}"]})
+                save_dishes(to_save)
+                del st.session_state.proposals
+                st.session_state.flash = ("success", f"Saved {len(to_save)} dishes to menu.json.")
+                st.rerun()
+            if discard:
+                del st.session_state.proposals
+                st.rerun()
 
     col_form, col_table = st.columns([1, 1.2])
 
@@ -164,7 +272,7 @@ with tab_owner:
             # Handle multiple kitchen stations
             item_stations = st.multiselect(
                 "Kitchen Stations Used",
-                options=["wok", "grill", "fryer", "salad bar", "steam station", "bakery"],
+                options=backend.STATIONS,
                 default=["wok"]
             )
 
@@ -184,7 +292,10 @@ with tab_owner:
                     menu_list.append(new_dish)
                     backend.save_menu(menu_list, MENU_FILE)
 
-                    st.success(f"Successfully added '{item_name}' to menu.json!")
+                    st.session_state.flash = ("success", f"Successfully added '{item_name}' to menu.json!")
+                    # "Did you forget something?" check on the new dish
+                    with st.spinner("Checking for allergens you might have missed..."):
+                        run_audit([new_dish])
                     st.rerun()
                 else:
                     st.error("Please fill in all fields (Name, Ingredients, and Stations).")
@@ -206,6 +317,34 @@ with tab_owner:
             st.dataframe(pd.DataFrame(table_rows), use_container_width=True, hide_index=True)
         else:
             st.info("Menu is currently empty.")
+
+    # --- "DID YOU FORGET SOMETHING?" AUDIT ---
+    st.write("---")
+    st.markdown("#### Missing Allergen Check")
+    st.caption("AI compares each dish with what it usually contains and flags allergens you may not have listed.")
+
+    if st.button("Audit whole menu"):
+        with st.spinner("Checking every dish..."):
+            run_audit(current_menu)
+        st.rerun()
+
+    audit = st.session_state.get("audit")
+    if audit:
+        for i, s in enumerate(audit):
+            col_text, col_add, col_dismiss = st.columns([6, 1, 1])
+            col_text.warning(
+                f"**{s['dish']}**: {s['reason']} Add **{s['ingredient']}** "
+                f"(flags {', '.join(s['allergens'])})?"
+            )
+            if col_add.button("Add", key=f"audit_add_{i}"):
+                add_ingredient(s["dish"], s["ingredient"])
+                audit.pop(i)
+                st.rerun()
+            if col_dismiss.button("Dismiss", key=f"audit_dismiss_{i}"):
+                audit.pop(i)
+                st.rerun()
+    elif audit == []:
+        st.info("No missing allergens suggested. The AI can miss things, so keep reviewing recipes with your kitchen.")
 
     st.write("---")
     st.markdown("#### Active Kitchen Cross-Contamination Map")

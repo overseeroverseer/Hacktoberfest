@@ -11,26 +11,46 @@ INGREDIENT_ALLERGENS = {
     "almonds": {"tree nut"},
     "cashews": {"tree nut"},
     "walnuts": {"tree nut"},
+    "pine nuts": {"tree nut"},
+    "pecans": {"tree nut"},
+    "pistachios": {"tree nut"},
+    "hazelnuts": {"tree nut"},
+    "pesto": {"tree nut", "milk"},
+    "peanut butter": {"peanut"},
     "soy sauce": {"soy", "wheat"},
+    "tofu": {"soy"},
+    "miso": {"soy"},
     "oyster sauce": {"shellfish", "soy", "wheat"},
     "wheat flour": {"wheat"},
     "wheat bun": {"wheat"},
     "wheat wrapper": {"wheat"},
     "panko": {"wheat"},
     "beer": {"wheat"},
+    "bread": {"wheat"},
+    "pasta": {"wheat"},
+    "egg noodles": {"wheat", "egg"},
     "egg": {"egg"},
+    "mayonnaise": {"egg"},
     "milk": {"milk"},
     "cheddar": {"milk"},
     "butter": {"milk"},
+    "parmesan": {"milk"},
+    "cream": {"milk"},
+    "yogurt": {"milk"},
     "shrimp": {"shellfish"},
+    "crab": {"shellfish"},
     "fish sauce": {"fish"},
     "cod": {"fish"},
     "salmon": {"fish"},
+    "anchovies": {"fish"},
     "sesame oil": {"sesame"},
     "sesame seeds": {"sesame"},
+    "tahini": {"sesame"},
 }
 
 ALLERGENS = sorted(set().union(*INGREDIENT_ALLERGENS.values()))
+
+STATIONS = ["wok", "grill", "fryer", "salad bar", "steam station", "bakery"]
 
 
 def load_menu(path=MENU_PATH):
