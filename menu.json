@@ -45,6 +45,11 @@
     "stations": ["fryer"]
   },
   {
+    "name": "Spring Rolls",
+    "ingredients": ["cabbage", "carrot", "wheat wrapper", "vegetable oil"],
+    "stations": ["fryer"]
+  },
+  {
     "name": "Grilled Salmon",
     "ingredients": ["salmon", "lemon", "olive oil", "dill"],
     "stations": ["grill"]
