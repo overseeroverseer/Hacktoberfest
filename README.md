@@ -111,8 +111,6 @@ If you are a developer looking to confirm the baseline package structure, verify
 - **menu.py**: Handles the core backend processing, ingredient-to-allergen mapping, station-contamination matrices, and dataset search logic.
 - **app.py**: Handles the Streamlit user interface, database updates, interactive components, and customer chat interface.
 
----
-
 ## Features and User Capabilities
 
 SafeBytes bridges back-of-house kitchen workflows with front-of-house consumer ordering to make allergen transparency actionable and accessible.
