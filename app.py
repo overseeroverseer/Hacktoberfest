@@ -5,6 +5,7 @@ from pathlib import Path
 
 # Import Person A's backend utilities
 import menu as backend
+from assistant import answer
 
 st.set_page_config(page_title="SafeBytes", layout="wide")
 
@@ -117,32 +118,28 @@ with tab_customer:
     # --- STEP 3: PLUG IN PERSON A'S CHAT ---
     st.write("---")
     st.subheader("Ask SafeBytes Assistant")
-    st.caption("Ask questions about substitutions, oil types, or prep methods.")
+    st.caption("Describe your allergies in your own words, in any language.")
 
     if "messages" not in st.session_state:
         st.session_state.messages = [
-            {"role": "assistant", "content": "Hi! What can I clarify about today's ingredients or preparation?"}
+            {"role": "assistant", "content": "Hi! Tell me about any food allergies and I'll check the menu for you."}
         ]
 
     for msg in st.session_state.messages:
         with st.chat_message(msg["role"]):
-            st.write(msg["content"])
+            st.markdown(msg["content"])
 
-    if prompt := st.chat_input("e.g. Can the Veggie Fried Rice be made without touching the peanut wok?"):
+    if prompt := st.chat_input("e.g. My friend has a severe nut allergy"):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
-            st.write(prompt)
+            st.markdown(prompt)
 
-        # PLUG-IN SPOT FOR PERSON A: Match query context with backend allergen status
-        bot_reply = (
-            f"Checking backend data... Based on our current menu configuration, "
-            f"Veggie Fried Rice shares a wok station with Pad Thai (which contains peanuts). "
-            f"Please request a sanitized wok surface from your server."
-        )
-
-        st.session_state.messages.append({"role": "assistant", "content": bot_reply})
+        # Person A's assistant: AI reads the allergens, check() decides, guard verifies the wording
         with st.chat_message("assistant"):
-            st.write(bot_reply)
+            with st.spinner("Checking the menu..."):
+                bot_reply = answer(prompt, current_menu)
+            st.markdown(bot_reply)
+        st.session_state.messages.append({"role": "assistant", "content": bot_reply})
 
 # ==========================================
 # STEP 1: RESTAURANT OWNER PAGE
